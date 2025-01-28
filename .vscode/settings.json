@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "array": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp",
+        "algorithm": "cpp",
+        "format": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "utility": "cpp",
+        "map": "cpp",
+        "ostream": "cpp",
+        "unordered_map": "cpp",
+        "queue": "cpp",
+        "deque": "cpp",
+        "stack": "cpp",
+        "list": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

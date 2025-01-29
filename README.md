@@ -1,78 +1,105 @@
-# 🚀 DSA Learning Repository
+🚀 DSA Learning Repository
 
-Welcome to the **DSA Learning Repository**! This repository is dedicated to learning and mastering Data Structures and Algorithms (DSA) with well-structured resources, code implementations, and problem sets.
+Welcome to the DSA Learning Repository! This repository is dedicated to learning and mastering Data Structures and Algorithms (DSA) with well-structured resources, code implementations, and problem sets.
 
----
+📌 Topics Covered
 
-## 📌 Topics Covered
+Arrays
 
-- **Arrays**
-- **Linked Lists**
-- **Stacks & Queues**
-- **Recursion & Backtracking**
-- **Sorting & Searching**
-- **Binary Trees & BSTs**
-- **Graphs (BFS, DFS, MST, Shortest Path)**
-- **Dynamic Programming**
-- **Greedy Algorithms**
-- **Trie & String Algorithms**
-- **Bit Manipulation**
-- **Segment Tree & Fenwick Tree**
-- **Heap & Priority Queue**
+Linked Lists
 
----
+Stacks & Queues
 
-## 📁 Repository Structure
-📂 DSA-Learning │── 📂 Arrays │── 📂 LinkedLists │── 📂 Graphs │── 📂 Trees │── 📂 DP │── 📂 Sorting │── 📂 Searching │── 📂 Miscellaneous │── README.md
+Recursion & Backtracking
 
+Sorting & Searching
+
+Binary Trees & BSTs
+
+Graphs (BFS, DFS, MST, Shortest Path)
+
+Dynamic Programming
+
+Greedy Algorithms
+
+Trie & String Algorithms
+
+Bit Manipulation
+
+Segment Tree & Fenwick Tree
+
+Heap & Priority Queue
+
+📁 Repository Structure
+
+📂 DSA-Learning
+│── 📂 Arrays
+│── 📂 LinkedLists
+│── 📂 Graphs
+│── 📂 Trees
+│── 📂 DP
+│── 📂 Sorting
+│── 📂 Searching
+│── 📂 Miscellaneous
+│── README.md
 
 Each folder contains:
-- 📜 **Concept Notes**
-- 📝 **Code Implementations (C++, Java, Python)**
-- 💡 **Practice Problems with Solutions**
-- 🎯 **Challenges & Contest Problems**
 
----
+📜 Concept Notes
 
-## 🔥 How to Use This Repository?
+📝 Code Implementations (C++, Java, Python)
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/DSA-Learning.git
-   Navigate to the topic you want to learn.
+💡 Practice Problems with Solutions
+
+🎯 Challenges & Contest Problems
+
+🔥 How to Use This Repository?
+
+Clone the repository:
+
+git clone https://github.com/maheshsingh20/DSA-Learning.git
+
+Navigate to the topic you want to learn.
+
 Read the concept notes.
+
 Solve the provided problems.
+
 Practice more on platforms like LeetCode, CodeForces, and GeeksForGeeks.
+
 🎯 Contribution Guide
+
 Want to contribute? Follow these steps:
 
 Fork the repository.
+
 Create a new branch:
-sh
-Copy code
+
 git checkout -b feature-topic
+
 Add your implementations and notes.
+
 Commit your changes:
-sh
-Copy code
+
 git commit -m "Added topic XYZ with solutions"
+
 Push to your fork:
-sh
-Copy code
+
 git push origin feature-topic
+
 Create a Pull Request.
+
 📌 Resources
+
 Striver’s SDE Sheet
+
 LeetCode Top Interview Questions
+
 CP Handbook by CP-Algorithms
+
 🚀 Stay Connected
-🔗 GitHub: @maheshsingh20 
-💬 LinkedIn: https://www.linkedin.com/in/maheshsingh20/
-📧 Email: singhmahesh2924@gmail.com 
+
+🔗 GitHub: @maheshsingh20💬 LinkedIn: Mahesh Singh📧 Email: singhmahesh2924@gmail.com
 
 🎯 Happy Coding & Keep Practicing! 💻🔥
 
-vbnet
-Copy code
-
-Let me know if you need any modifications! 🚀

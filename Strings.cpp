@@ -38,13 +38,24 @@ int main(){
     cout<<str1.append(str3.begin()+6,str3.end())<<endl; //add the last 5 characters of str3 to str1
 
 
-    */
+    
 
    //OPERATOR +=
 
     string str1="Hello ";
     string str2="World";
     str1+=str2;
-    cout<<str1<<endl;  //add str2 to str1
+    cout<<str1<<endl;  //add str2 to 
+
+    */ 
+
+    //SUBSTRING
+
+    string str1="My name is Mahesh Singh ";
+    string str2=str1.substr(8,7); //get the substring from index 7
+    size_t pos=str1.find("Singh"); //find the position of Singh
+    cout<<str2<<endl;  //get the substring from index 7
+    cout<<pos<<endl;
+    cout<<str1.substr(pos)<<endl;  //get the substring from index 7
     return 0;
 }

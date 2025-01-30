@@ -276,20 +276,77 @@ bool checkpalindrome(string &str, int start, int end){
 
 
 
+// #include <iostream>
+// using namespace std;
+
+
+// int factorialOf(int num){
+//     if(num==1){
+//         return num;
+//     }
+//     return num*factorialOf(num-1);
+// }
+
+// int main(){
+//     int num1;
+//     cout<<"Enter the number: ";
+//     cin>>num1;
+//     cout<<factorialOf(num1);
+// }
+
+
+
 #include <iostream>
 using namespace std;
 
 
-int factorialOf(int num){
-    if(num==1){
-        return num;
+void printNum(int num){
+    if(num==11){
+        return;
     }
-    return num*factorialOf(num-1);
+    printNum(num+1);
+    cout<<num<<" ";
 }
 
+void printNumReverse(int num){
+    if(num==0){
+        return;
+    }
+    printNumReverse(num-1);
+    cout<<num<<" ";
+}
+
+ /*Sum of first n number*/
+
+int sumOfNum(int num){
+    if(num==1){
+        return 1;
+    }
+    return num+sumOfNum(num-1);
+}
+
+
+/*sum of numbers from n to m*/
+int sumOf(int num1, int num2){
+    if(num1==num2){
+        return num2;
+    }
+    return num1+sumOf(num1+1,num2);
+}
+
+
+
 int main(){
-    int num1;
-    cout<<"Enter the number: ";
-    cin>>num1;
-    cout<<factorialOf(num1);
+    int num;
+    cout<<"Enter the first number: ";
+    cin>>num;
+    int num2;
+    cout<<"Enter the second number: ";
+    cin>>num2;
+    // printNum(num);
+    cout<<sumOf(num, num2);
+
+
+
+    return 0;
 }

@@ -51,4 +51,13 @@ int main(){
         cout<<"Not Found"<<endl;
 
     }
+
+    /*Lower bound*/
+
+    if (it != arr.end()) {
+        cout << "Lower bound of " << n << " is: " << *it << endl;  // Output: 67
+        cout << "Index of lower bound: " << it - arr.begin() << endl;  // Output: 3
+    } else {
+        cout << "No lower bound found for " << n << endl;
+    }
 }

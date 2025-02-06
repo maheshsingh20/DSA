@@ -267,6 +267,47 @@ int kthAncestor(node* root, int k, int node){
 }
 
 
+
+int mininum(node* root){
+    if(root==NULL) return INT_MAX;
+    int leftt=mininum(root->left);
+    return leftt;
+}
+
+
+node* deleteNode(node* root, int key){
+    if(root==NULL) return root;
+    if(root->data==key){
+        //if 0 child
+        if(root->left==NULL && root->right==NULL){
+            delete root;
+            return NULL;
+        }
+        //if 1 child
+        if(root->left==NULL){
+            node* temp=root->right;
+            delete root;
+            return temp;
+        }
+        if(root->right==NULL){
+            node* temp=root->left;
+            delete root;
+            return temp;
+        }
+        //if 2 child
+        int mini=mininum(root->right);
+        root->data=mini;
+        root->right=deleteNode(root->right,mini);
+        return root;
+    }
+    root->left=deleteNode(root->left,key);
+    root->right=deleteNode(root->right,key);
+    return root;
+}
+
+
+
+
 int main(){
     node* root = btrec();
     cout << "Level Order Traversal:" << endl;

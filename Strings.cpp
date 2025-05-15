@@ -51,11 +51,17 @@ int main(){
 
     //SUBSTRING
 
-    string str1="My name is Mahesh Singh ";
-    string str2=str1.substr(8,7); //get the substring from index 7
-    size_t pos=str1.find("Singh"); //find the position of Singh
-    cout<<str2<<endl;  //get the substring from index 7
-    cout<<pos<<endl;
-    cout<<str1.substr(pos)<<endl;  //get the substring from index 7
+    // string str1="My name is Mahesh Singh ";
+    // string str2=str1.substr(8,7); //get the substring from index 7
+    // size_t pos=str1.find("Singh"); //find the position of Singh
+    // cout<<str2<<endl;  //get the substring from index 7
+    // cout<<pos<<endl;
+    // cout<<str1.substr(pos)<<endl;  //get the substring from index 7
+
+    string str="daabcbaabcbc";
+    while (str.find("abc") != string::npos){
+        str.erase(str.find("abc"),3);
+    }
+    cout<<str<<endl;
     return 0;
 }

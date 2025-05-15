@@ -1,8 +1,10 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 
 class Node {
+
 public:
     int data;
     Node* left;
@@ -82,6 +84,38 @@ void LOT(Node* root){
 
 }
 
+/* Lowest Common Ancestor of a Binary Search Tree*/
+
+
+/*BST ITERATOR*/
+
+class BSTiterator{
+    private:
+    stack<Node*> s;
+    void pushAll(Node* root){
+        while(root != NULL){
+            s.push(root);
+            root = root->left;
+        }
+    }
+    public:
+    BSTiterator(Node* root){
+        pushAll(root);
+    }
+    int next(){
+        Node* top = s.top();
+        s.pop();
+        pushAll(top->right);
+        return top->data;
+    }
+    bool hasNext(){
+        return !s.empty();
+    }
+};
+
+
+/*BST ITERATOR END*/
+
 
 
 
@@ -89,6 +123,13 @@ void LOT(Node* root){
 
 int main() {
     Node* root = buildTree();
+
+    BSTiterator it(root);
+    while(it.hasNext()){
+        cout << it.next() << " ";
+    }
+    return 0;
+
     // if (ifBST(root)) {
     //     cout << "Yes, it is a BST" << endl;
     // } else {

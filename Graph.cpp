@@ -643,7 +643,7 @@ void helpKahns(unordered_map<int, vector<int>> &Graph, vector<int> &indegree, ve
         ans.push_back(node);
         for (auto &it : Graph[node]) {
             indegree[it]--;
-            if (indegree[it] == 0) {
+            if (indegree[it] == 0) {hj
                 q.push(it);
             }
         }

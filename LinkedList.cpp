@@ -1,53 +1,60 @@
 #include <iostream>
 using namespace std;
 
-
-class node{
+class Node{
     public:
     int data;
-    node* next;
-    node(int data){
+    Node* next;
+    Node(int data){
         this->data=data;
         this->next=NULL;
     }
 };
 
+struct Node {
+    int data;
+    Node* next;
+    Node(int d) : data(d), next(nullptr) {}
+};
 
-void insertAtHead(node* &head, int data){
-    node* temp=new node(data);
-    temp->next=head;
-    head=temp;
+void insertAtHead(Node*& head, int data) {
+    Node* newNode = new Node(data);
+    newNode->next = head;
+    head = newNode;
 }
 
-void print(node* &head){
-    node* temp=head;
-    while(temp!=NULL){
-        cout<<temp->data<<" ";
-        temp=temp->next;
+void insertAtTail(Node*& head, int data) {
+    Node* newNode = new Node(data);
+    if (head == nullptr) {
+        head = newNode;
+        return;
+    }
+    Node* temp = head;
+    while (temp->next != nullptr) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+
+
+void printList(Node* head){
+    while(head!=NULL){
+        cout<<head->data<<" ";
+        head=head->next;
     }
     cout<<endl;
 }
 
-void reverseList(node* &head){
-    node* temp=head->next;
-    node* curr=NULL;
-    while(temp!=NULL){
-        head->next=curr;
-        curr=head;
-        head=temp;
-        temp=temp->next;
-    }
-}
 
 int main(){
-    node* list1=new node(10);
-    node* head=list1;
-    insertAtHead(head,9);
-    insertAtHead(head,8);
-    insertAtHead(head,7);
-    insertAtHead(head,6);
-    print(head);
-    reverseList(head);
-    print(head);
-    return 0;
+    Node* head = new Node(1);
+    insertAtHead(head, 2);
+    insertAtHead(head, 3);
+    insertAtHead(head, 4);
+    insertAtTail(head,7);
+    printList(head);
+    return 0;   
 }
+
+

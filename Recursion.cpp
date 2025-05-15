@@ -296,57 +296,126 @@ bool checkpalindrome(string &str, int start, int end){
 
 
 
+// #include <iostream>
+// using namespace std;
+
+
+// void printNum(int num){
+//     if(num==11){
+//         return;
+//     }
+//     printNum(num+1);
+//     cout<<num<<" ";
+// }
+
+// void printNumReverse(int num){
+//     if(num==0){
+//         return;
+//     }
+//     printNumReverse(num-1);
+//     cout<<num<<" ";
+// }
+
+//  /*Sum of first n number*/
+
+// int sumOfNum(int num){
+//     if(num==1){
+//         return 1;
+//     }
+//     return num+sumOfNum(num-1);
+// }
+
+
+// /*sum of numbers from n to m*/
+// int sumOf(int num1, int num2){
+//     if(num1==num2){
+//         return num2;
+//     }
+//     return num1+sumOf(num1+1,num2);
+// }
+
+
+
+// int main(){
+//     int num;
+//     cout<<"Enter the first number: ";
+//     cin>>num;
+//     int num2;
+//     cout<<"Enter the second number: ";
+//     cin>>num2;
+//     // printNum(num);
+//     cout<<sumOf(num, num2);
+
+
+
+//     return 0;
+// }
+
+/*
+
 #include <iostream>
 using namespace std;
 
-
-void printNum(int num){
-    if(num==11){
-        return;
-    }
-    printNum(num+1);
-    cout<<num<<" ";
-}
-
-void printNumReverse(int num){
+void help(int num){
     if(num==0){
         return;
     }
-    printNumReverse(num-1);
+    help(num-1);
     cout<<num<<" ";
 }
 
- /*Sum of first n number*/
 
-int sumOfNum(int num){
-    if(num==1){
+int help1(int a, int b){
+    if(b==0) return 1;
+    if(a==0 || a==1){
         return 1;
     }
-    return num+sumOfNum(num-1);
+    return a * help1(a, b-1);
 }
-
-
-/*sum of numbers from n to m*/
-int sumOf(int num1, int num2){
-    if(num1==num2){
-        return num2;
-    }
-    return num1+sumOf(num1+1,num2);
-}
-
 
 
 int main(){
-    int num;
-    cout<<"Enter the first number: ";
-    cin>>num;
-    int num2;
-    cout<<"Enter the second number: ";
-    cin>>num2;
-    // printNum(num);
-    cout<<sumOf(num, num2);
+
+    // int num;
+    // cout<<"Enter the number: ";
+    // cin>>num;
+    // help(num);
+    cout<<help1(2, 10);
+    return 0;
+}
+
+
+*/
 
 
 
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+
+// int sumof(vector<int>& arr, int n){
+//     if(n==arr.size()){
+//         return 0;
+//     }
+//     return arr[n]+sumof(arr, n+1);
+// }
+
+
+// int powerOfX(int a, int b){
+//     if(b==1){
+//         return a;
+//     }
+//     if(b==0) return 1;
+//     int ans=a*pow(a,b-1);
+//     return ans;
+// }
+
+
+int main(){
+    // vector<int> arr = {1,2,3,4,5};
+    // cout<<sumof(arr, 0);
+    cout<<"Power of b on a: "<<powerOfX(2,10);
     return 0;
 }

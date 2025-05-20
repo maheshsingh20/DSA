@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -55,4 +56,56 @@ string searchIdThisFound(string s, string t){
 int main(){
     vector<int>ans={0,1,7,4,4,5};
     cout<<"Answer is: "<<countGoodPairs(ans, 3, 6)<<endl;
+}
+
+*/
+
+
+/*
+
+#include <bits/stdc++.h>
+using namespace std;
+
+//Longest Substring without repeating characters
+string longestSubString(string s){
+    string result="";
+    int start=0;
+    int Maxlen=0;
+    string curr="";
+    vector<int>fre(26,0);
+    for(int i=0;i<s.size();i++){
+        if(fre[s[i]-'A']==0){
+            fre[s[i]-'A']++;
+        }
+        else{
+            while(fre[s[i]-'A']>0){
+                fre[s[start]-'A']--;
+                start++;
+            }
+        }
+        if(i-start+1>Maxlen){
+            Maxlen=i-start+1;
+            result=s.substr(start,Maxlen);
+        }
+    }
+    return result;
+}
+
+
+
+int main(){
+    string str1="MAABC";
+    cout<<longestSubString(str1)<<endl;
+}
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int>lps
+
+int main(){
+    string s="abc";
+    string t="def";
+    cout<<searchIdThisFound(s,t)<<endl;
 }

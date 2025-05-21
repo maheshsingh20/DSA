@@ -128,3 +128,43 @@ int main(){
 
 */
 
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(vector<int>&num){
+    for(int &v:num){
+        cout<<v<<" ";
+    }
+    cout<<endl;
+}
+//mid-point
+
+
+
+int main(){
+    // int a=0;
+    // int b=6;
+    // cout<<midpoint(a,b);
+    vector<int>a={0,4,3,1,0};
+    vector<int>b={1,4,3,1,5};
+    int val=inner_product(a.begin(),a.end(),b.begin(),0);
+    int val2=inner_product(a.begin(),a.end(),b.begin(),0,plus<>(),equal_to<>());
+    cout<<val<<endl;
+    cout<<val2<<endl;
+    vector<int>ans(5);//first create an empty vector of same size
+    partial_sum(b.begin(),b.end(),ans.begin());  // used to get prefix sum
+    for(int &i:ans){
+        cout<<i<<" ";
+    }
+    cout<<endl;
+    vector<int>num1={5,2,3,78,9,6};
+    sort(num1.begin(),num1.end(),greater<int>());
+    
+    cout<<"Sorted in decending order"<<endl;
+    print(num1);
+    // squaree(num1);
+    string str1="ABCDABKDABCD";
+    string str2="A.*";
+    regex_match(str1,regex(str2));
+    return 0;
+}

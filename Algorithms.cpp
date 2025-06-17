@@ -126,7 +126,10 @@ int main(){
     return 0;
 }
 
-*/
+
+
+
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -168,3 +171,8 @@ int main(){
     regex_match(str1,regex(str2));
     return 0;
 }
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;

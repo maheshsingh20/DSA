@@ -1,11 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
-
 /*
+
 
 
 #include <iostream>
@@ -49,7 +43,7 @@ int main() {
 
 
 
-*/
+
 
 //House Robber -->> 1
 
@@ -65,7 +59,7 @@ int rob(vector<int> &nums){
 }
 
 
-/*  Matrix Chain Multiplication  */  
+  
 
 
 
@@ -81,5 +75,33 @@ int main()
     // cout<<rob(nums);
 
     
+    return 0;
+}
+*/
+
+
+/*  Matrix Chain Multiplication  */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+//climbing stairs
+int solve(int n) {
+    //base case
+    if(n<0) return 0;
+    if(n==0){
+        return 1;
+    }
+
+    int ans=0;
+    for(int i=1;i<3;i++){
+        ans+=solve(n-i);
+    }
+    return ans;
+}
+
+int main(){
+    int n=5;
+    cout<<solve(n);
     return 0;
 }

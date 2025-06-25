@@ -92,7 +92,6 @@ int solve(int n) {
     if(n==0){
         return 1;
     }
-
     int ans=0;
     for(int i=1;i<3;i++){
         ans+=solve(n-i);

@@ -1,168 +1,107 @@
-#include <iostream>
-#include <vector>
+/*
+class Solution {
+public:
+    int numSubseq(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        int mod = 1e9 + 7;
+        int n = nums.size();
+        vector<int> pow2(n, 1);
+
+        // Precompute powers of 2 modulo mod
+        for (int i = 1; i < n; ++i)
+            pow2[i] = (pow2[i - 1] * 2) % mod;
+
+        int start = 0, end = n - 1;
+        int res = 0;
+
+        while (start <= end) {
+            if (nums[start] + nums[end] <= target) {
+                res = (res + pow2[end - start]) % mod;
+                start++;
+            } else {
+                end--;
+            }
+        }
+
+        return res;
+    }
+};
+
+
+*/
+
+
+#include <bits/stdc++.h>
 using namespace std;
 
-class TrieNode
-{
-public:
-    char data;
-    TrieNode *children[26];
-    bool isTerminal; // Fixed typo: was isTerminal
+class TrieNode{
+  public:
+  TrieNode* children[26];
+  bool isTerminal;
+  TrieNode(){
+      for(int i=0;i<26;i++){
+          children[i]=NULL;
+      }
+      isTerminal=false;
+  }
+};
+class Trie{
+  TrieNode* root;
+  public:
+  Trie(){
+    root = new TrieNode();
+  }
+  void insert(string word){
+    TrieNode *node = root;
 
-    TrieNode(char ch) : data(ch), isTerminal(false)
-    {
-        for (int i = 0; i < 26; i++)
-        {
-            children[i] = nullptr;
-        }
+    for(char ch:word){
+      ch=tolower(ch);
+      if(node->children[ch-'a']==nullptr){
+        node->children[ch-'a']=new TrieNode();
+      }
+      node=node->children[ch-'a'];
     }
+    node->isTerminal=true;
+  }
+  //search
+  bool search(string word){
+    TrieNode *node = root;
+
+    for(char ch:word){
+      ch=tolower(ch);
+      if(node->children[ch-'a']==nullptr){
+        return false;
+      }else{
+        node=node->children[ch-'a'];
+      }
+    }
+    return node->isTerminal;
+  }
+  bool isPrefix(string word){
+    TrieNode *node = root;
+    for(char ch:word){
+      ch = tolower(ch);
+      if(node->children[ch-'a']==nullptr){
+        return false;
+      }
+      node = node->children[ch-'a'];
+    }
+    return true;
+  }
 };
 
-class Trie
-{
-public:
-    TrieNode *root;
 
-    Trie()
-    {
-        root = new TrieNode('\0');
-    }
 
-    ~Trie()
-    {
-        clear(root);
-    }
 
-    void clear(TrieNode *node)
-    {
-        if (!node)
-            return;
-        for (int i = 0; i < 26; i++)
-        {
-            if (node->children[i])
-            {
-                clear(node->children[i]);
-            }
-        }
-        delete node;
-    }
 
-    void insertUtil(TrieNode *node, const string &word, int index)
-    {
-        if (index == word.length())
-        {
-            node->isTerminal = true;
-            return;
-        }
-
-        int childIndex = toupper(word[index]) - 'A';
-        if (childIndex < 0 || childIndex >= 26)
-            return; // Invalid character
-
-        if (!node->children[childIndex])
-        {
-            node->children[childIndex] = new TrieNode(word[index]);
-        }
-        insertUtil(node->children[childIndex], word, index + 1);
-    }
-
-    void insertWord(const string &word)
-    {
-        if (word.empty())
-            return;
-        insertUtil(root, word, 0);
-    }
-    /*
-    We traverse in trie so that if we find our next char we go further 
-    int last we find our final node 
-    if that node is terminal then we found our word otherwise return false
-    
-    */
-    bool searchUtil(TrieNode *node, const string &word, int index)
-    {
-        if (index == word.length())
-        {
-            return node->isTerminal;
-        }
-
-        int childIndex = toupper(word[index]) - 'A';
-        if (childIndex < 0 || childIndex >= 26)
-            return false;
-
-        if (!node->children[childIndex])
-        {
-            return false;
-        }
-        return searchUtil(node->children[childIndex], word, index + 1);
-    }
-
-    bool searchWord(const string &word)
-    {
-        if (word.empty())
-            return false;
-        return searchUtil(root, word, 0);
-    }
-    /*
-
-    For deleting current node first of all we search the key and mark last node as false
-    then we check if the node has any child then we don't delete it otherwise we delete it
-    
-    */
-    void remove(TrieNode *root, string word)
-    {
-        if (!root)
-            return;
-
-        if (word.length() == 0)
-        {
-            root->isTerminal = false;
-            return;
-        }
-
-        int index = word[0] - 'A';
-        if (index < 0 || index > 25)
-            return;
-
-        TrieNode *child = root->children[index];
-        remove(child, word.substr(1));
-
-        // After returning, check if child is deletable
-        if (child && child->isTerminal == false)
-        {
-            bool hasChild = false;
-            for (int i = 0; i < 26; i++)
-            {
-                if (child->children[i] != nullptr)
-                {
-                    hasChild = true;
-                    break;
-                }
-            }
-            if (!hasChild)
-            {
-                delete child;
-                root->children[index] = nullptr;
-            }
-        }
-    }
-
-    void removeWord(string word)
-    {
-        remove(root, word);
-    }
-};
-
-int main()
-{
-    Trie t;
-    t.insertWord("ABCD");
-    t.insertWord("ABCE");
-    t.insertWord("ABCF");
-    t.insertWord("ABCG");
-
-    cout << "Search 'ABCD': " << (t.searchWord("ABCD") ? "Found" : "Not Found") << endl;
-    cout << "Search 'XYZ': " << (t.searchWord("XYZ") ? "Found" : "Not Found") << endl;
-    t.removeWord("ABCD");
-    cout << "Search 'ABCD' after removal: " << (t.searchWord("ABCD") ? "Found" : "Not Found") << endl;
-    return 0;
+int main(){
+  Trie tr;
+  tr.insert("Mahesh");
+  bool found=tr.isPrefix("Mahed");
+  if(found){
+    cout<<"Found"<<endl;
+  }else{
+    cout<<"Not Found"<<endl;
+  }
+  return 0;
 }

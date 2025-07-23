@@ -19,7 +19,9 @@
     "deque": "cpp",
     "stack": "cpp",
     "list": "cpp",
-    "xtree": "cpp"
+    "xtree": "cpp",
+    "atomic": "cpp",
+    "memory": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled",
   "workbench.settings.editor": "json"

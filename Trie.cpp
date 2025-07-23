@@ -1,4 +1,5 @@
 /*
+/*
 class Solution {
 public:
     int numSubseq(vector<int>& nums, int target) {
@@ -28,80 +29,130 @@ public:
 };
 
 
-*/
-
 
 #include <bits/stdc++.h>
 using namespace std;
 
-class TrieNode{
-  public:
-  TrieNode* children[26];
+class TrieNode
+{
+public:
+  TrieNode *children[26];
   bool isTerminal;
-  TrieNode(){
-      for(int i=0;i<26;i++){
-          children[i]=NULL;
-      }
-      isTerminal=false;
+  TrieNode()
+  {
+    for (int i = 0; i < 26; i++)
+    {
+      children[i] = NULL;
+    }
+    isTerminal = false;
   }
 };
-class Trie{
-  TrieNode* root;
-  public:
-  Trie(){
+class Trie
+{
+  TrieNode *root;
+
+public:
+  Trie()
+  {
     root = new TrieNode();
   }
-  void insert(string word){
+  void insert(string word)
+  {
     TrieNode *node = root;
 
-    for(char ch:word){
-      ch=tolower(ch);
-      if(node->children[ch-'a']==nullptr){
-        node->children[ch-'a']=new TrieNode();
+    for (char ch : word)
+    {
+      ch = tolower(ch);
+      if (node->children[ch - 'a'] == nullptr)
+      {
+        node->children[ch - 'a'] = new TrieNode();
       }
-      node=node->children[ch-'a'];
+      node = node->children[ch - 'a'];
     }
-    node->isTerminal=true;
+    node->isTerminal = true;
   }
-  //search
-  bool search(string word){
+  // search
+  bool search(string word)
+  {
     TrieNode *node = root;
 
-    for(char ch:word){
-      ch=tolower(ch);
-      if(node->children[ch-'a']==nullptr){
+    for (char ch : word)
+    {
+      ch = tolower(ch);
+      if (node->children[ch - 'a'] == nullptr)
+      {
         return false;
-      }else{
-        node=node->children[ch-'a'];
+      }
+      else
+      {
+        node = node->children[ch - 'a'];
       }
     }
     return node->isTerminal;
   }
-  bool isPrefix(string word){
+  bool isPrefix(string word)
+  {
     TrieNode *node = root;
-    for(char ch:word){
+    for (char ch : word)
+    {
       ch = tolower(ch);
-      if(node->children[ch-'a']==nullptr){
+      if (node->children[ch - 'a'] == nullptr)
+      {
         return false;
       }
-      node = node->children[ch-'a'];
+      node = node->children[ch - 'a'];
     }
     return true;
   }
 };
 
-
-
-
-
-int main(){
+int main()
+{
   Trie tr;
   tr.insert("Mahesh");
-  bool found=tr.isPrefix("Mahed");
-  if(found){
-    cout<<"Found"<<endl;
-  }else{
-    cout<<"Not Found"<<endl;
+  bool found = tr.isPrefix("Mahed");
+  if (found)
+  {
+    cout << "Found" << endl;
+  }
+  else
+  {
+    cout << "Not Found" << endl;
   }
   return 0;
+}
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class TrieNode{
+  bool isTerminal;
+  TrieNode *child[26];
+  TrieNode(){
+    for (int i = 1; i <= 26;i++){
+      child[i] = nullptr;
+    }
+    isTerminal = false;
+  }
+};
+
+class Trie{
+  TrieNode *root;
+  Trie(){
+    root = new TrieNode();
+  }
+  void insert(string word){
+    TrieNode *node = root;
+    for(char ch : word){
+      ch = tolower(ch);
+      if (node->child[ch - 'a'] == nullptr){
+        node->child[ch - 'a'] = new TrieNode;
+        node= node->child[ch - 'a'];
+      }else{
+        node = node->child[ch - 'a'];
+      }
+    }
+  }
 }

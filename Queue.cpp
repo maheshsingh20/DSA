@@ -23,7 +23,7 @@ using namespace std;
 //     cout<<"Now About Deque"<<endl;
 
 //     deque<int> d;
-    
+
 //     d.push_back(1);
 //     d.push_back(2);
 //     d.push_back(3);
@@ -49,7 +49,7 @@ using namespace std;
 
 
 
-    
+
 //     return 0;
 // }
 
@@ -288,9 +288,9 @@ int main() {
     cout<<"Rear after pushBack operation: "<<q.rear<<endl;
     cout<<"Size of queue: "<<q.size<<endl;
 
-    
+
     // Insert 6,7,8,9,10 from front
-   
+
     q.pushFront(8);
     q.pushFront(9);
     q.pushFront(10);

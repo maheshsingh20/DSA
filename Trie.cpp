@@ -127,32 +127,94 @@ int main()
 #include <bits/stdc++.h>
 using namespace std;
 
-class TrieNode{
+class TrieNode
+{
+public:
   bool isTerminal;
   TrieNode *child[26];
-  TrieNode(){
-    for (int i = 1; i <= 26;i++){
+
+  TrieNode()
+  {
+    for (int i = 0; i < 26; i++)
+    {
       child[i] = nullptr;
     }
     isTerminal = false;
   }
 };
 
-class Trie{
+class Trie
+{
   TrieNode *root;
-  Trie(){
+
+public:
+  Trie()
+  {
     root = new TrieNode();
   }
-  void insert(string word){
+
+  // Insert a word
+  void insert(string word)
+  {
     TrieNode *node = root;
-    for(char ch : word){
+    for (char ch : word)
+    {
       ch = tolower(ch);
-      if (node->child[ch - 'a'] == nullptr){
-        node->child[ch - 'a'] = new TrieNode;
-        node= node->child[ch - 'a'];
+      if (node->child[ch - 'a'] == nullptr)
+      {
+        node->child[ch - 'a'] = new TrieNode();
+      }
+      node = node->child[ch - 'a'];
+    }
+    node->isTerminal = true;
+  }
+
+  // Search for a word
+  bool isExist(string word)
+  {
+    TrieNode *node = root;
+    for (int i = 0; i < word.length(); i++)
+    {
+      char ch = tolower(word[i]);
+      if (node->child[ch - 'a'] == nullptr)
+      {
+        return false;
+      }
+      node = node->child[ch - 'a'];
+    }
+    return node->isTerminal;
+  }
+
+  /*Isprefix*/
+  bool isPrefix(string_view str){
+    int n = str.size();
+    TrieNode *node = root;
+    for (int i = 0; i < n;i++){
+      char ch = tolower(str[i]);
+      if(node->child[ch-'a']==nullptr){
+        return false;
       }else{
         node = node->child[ch - 'a'];
       }
     }
+    return true;
   }
+};
+int main()
+{
+  Trie tr;
+  tr.insert("Mahesh");
+  tr.insert("Anjali");
+  tr.insert("Aniket");
+  bool res = tr.isPrefix("Mahesh");
+  bool res1 = tr.isPrefix("Ani");
+  if (res1)
+  {
+    cout << "Exist" << endl;
+  }
+  else
+  {
+    cout << "Not Exist" << endl;
+  }
+  return 0;
 }

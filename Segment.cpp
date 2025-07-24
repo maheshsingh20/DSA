@@ -1,90 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Segmentree
+class Segment
 {
 public:
-  vector<int> Segment;
-  Segmentree(int n)
-  {
-    Segment.resize(2*n);
-  }
-  void Build(vector<int> &arr, int idx, int left, int right)
-  {
-    if (left == right)
-    {
-      Segment[idx] = arr[left];
-      return;
-    }
-    int mid = (left + right) / 2;
-    Build(arr, 2 * idx + 1, left, mid);
-    Build(arr, 2 * idx + 2, mid + 1, right);
-    Segment[idx] = Segment[2 * idx + 1] + Segment[2 * idx + 2];
-  }
-  int querry(int idx, int left, int right, int start, int end)
-  {
-    if (start > right || end < left)
-    {
-      return 0;
+  vector<int> seg;
 
-    }
-    if (left >= start && right <= end)
+  Segment(int n)
+  {
+    seg.resize(n);
+  }
+
+  void build(vector<int> &arr, int l, int r, int i)
+  {
+    if (l == r)
     {
-      return Segment[idx];
+      seg[i] = pow(arr[l],2);
     }
-    int mid = (left + right) / 2;
-    int leftsum = querry(2 * idx + 1, left, mid, start, end);
-    int rightsum = querry(2 * idx + 2, mid + 1, right, start, end);
-    return leftsum + rightsum;
-  }
-  void Build2(vector<int>&arr,int idx, int left, int right){
-    if(left==right){
-      Segment[idx]=arr[left];
-      return;
+    else
+    {
+      int mid = (l + r) / 2;
+      build(arr, l, mid, 2 * i + 1);
+      build(arr, mid + 1, r, 2 * i + 2);
+      seg[i] = seg[2 * i + 1] + seg[2 * i + 2];
     }
-    int mid=(left+right)/2;
-    Build2(arr,2*idx+1,left,mid);
-    Build2(arr,2*idx+2,mid+1,right);
-    Segment[idx] = min(Segment[2 * idx + 1], Segment[2 * idx + 2]);
   }
-  int querry2(int idx,int start, int end, int left, int right){
-    if(start>right || end<left){
+  int query(int ql, int qr, int l, int r, int i)
+  {
+    if (ql > qr || ql > r || qr < l)
       return 0;
-    }
-    if(left>=start && right<=end){
-      return Segment[idx];
-    }
-    int left=querry2(2*idx+1,start,end,left,mid);
-    int right=querry2(2*idx+2,start,end,mid+1,right);
-    return min(left,right);
-  }
-  void update2(int idx, int left,int right, int pos,int val){
-    if(left==right){
-      Segment[idx]%=val;
-      return;
-    }
-    int mid=(left+right)/2;
-    if(pos<=mid){
-      update2(2*idx+1,left,mid,pos,val);
-    }else{
-      update2(2*idx+2,mid+1,right,pos,val);
-    }
+    if (ql <= l && qr >= r)
+      return seg[i];
+    int mid = (l + r) / 2;
+    int left = query(ql, qr, l, mid, 2 * i + 1);
+    int right = query(ql, qr, mid + 1, r, 2 * i + 2);
+    return left + right;
   }
 };
 
 int main()
 {
-  int n;
-  cin >> n;
-  vector<int> arr(n);
-  for (int i = 0; i < n; i++)
-  {
-    cin >> arr[i];
-  }
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  vector<int> arr = {4, 3, 5, 7, 8, 5, 2, 9};
+  int n = arr.size();
+  Segment s(4 * n);
+  s.build(arr, 0, n - 1, 0);
+  cout << s.query(0, 3, 0, n - 1, 0) << endl;
 
-  Segmentree s(n);
-  s.Build(arr, 0, 0, n - 1);
-  cout << s.querry(0, 0, n - 1, 0, n - 1) << endl;
-  s.update(0, 0, n - 1, 0, 5);
   return 0;
 }

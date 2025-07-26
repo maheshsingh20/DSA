@@ -1,35 +1,3 @@
-/*
-/*
-class Solution {
-public:
-    int numSubseq(vector<int>& nums, int target) {
-        sort(nums.begin(), nums.end());
-        int mod = 1e9 + 7;
-        int n = nums.size();
-        vector<int> pow2(n, 1);
-
-        // Precompute powers of 2 modulo mod
-        for (int i = 1; i < n; ++i)
-            pow2[i] = (pow2[i - 1] * 2) % mod;
-
-        int start = 0, end = n - 1;
-        int res = 0;
-
-        while (start <= end) {
-            if (nums[start] + nums[end] <= target) {
-                res = (res + pow2[end - start]) % mod;
-                start++;
-            } else {
-                end--;
-            }
-        }
-
-        return res;
-    }
-};
-
-
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -47,6 +15,7 @@ public:
     isTerminal = false;
   }
 };
+
 class Trie
 {
   TrieNode *root;
@@ -122,7 +91,7 @@ int main()
   return 0;
 }
 
-*/
+//Revise it again
 
 #include <bits/stdc++.h>
 using namespace std;

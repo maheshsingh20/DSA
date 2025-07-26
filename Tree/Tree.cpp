@@ -7,7 +7,6 @@ public:
     int data;
     Node* left;
     Node* right;
-
     Node(int d) {
         data = d;
         left = NULL;
@@ -116,25 +115,25 @@ int width(Node* root) {
 
 int main() {
     Node* root = buildTree();
-    
+
     cout << "Level Order Traversal:\n";
     printTree(root);
-    
+
     cout << "Inorder Traversal: ";
     inorder(root);
     cout << endl;
-    
+
     cout << "Preorder Traversal: ";
     preorder(root);
     cout << endl;
-    
+
     cout << "Postorder Traversal: ";
     postorder(root);
     cout << endl;
-    
+
     cout << "Height of Tree: " << height(root) << endl;
     cout << "Diameter of Tree: " << diameter(root) << endl;
     cout << "Width of Tree: " << width(root) << endl;
-    
+
     return 0;
 }

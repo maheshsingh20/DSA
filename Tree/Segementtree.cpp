@@ -189,7 +189,8 @@
 
 
 
-/*  Range Minimum Querry  */
+/*  Range Minimum Querry
+
 
 #include <iostream>
 #include <vector>
@@ -249,4 +250,51 @@ int main(){
     Segementtree st(arr);
     cout << st.range(0,3) << endl;
     return 0;
+}
+
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+class SegmentTree{
+  public:
+  vector<int> segment;
+    int n;
+
+    SegmentTree(int n) {
+        this->n = n;
+        segment.resize(4 * n);
+    }
+
+    void build(vector<int>& arr, int treeIndex, int lo, int hi) {
+        if (lo == hi) {
+            segment[treeIndex] = arr[lo];
+            return;
+        }
+        int mid = lo + (hi - lo) / 2;
+        build(arr, 2 * treeIndex + 1, lo, mid);
+        build(arr, 2 * treeIndex + 2, mid + 1, hi);
+        segment[treeIndex] = segment[2 * treeIndex + 1] ^ segment[2 * treeIndex + 2];
+    }
+
+    int query(int idx, int low, int high, int l, int r) {
+        if (l > high || r < low) {
+            return 0;
+        }
+        if (l <= low && r >= high) {
+            return segment[idx];
+        }
+        int mid = low + (high - low) / 2;
+        int left = query(2 * idx + 1, low, mid, l, r);
+        int right = query(2 * idx + 2, mid + 1, high, l, r);
+        return left ^ right;
+    }
+};
+int main(){
+  vector<int> arr = {1, 3, 5, 7, 9, 11};
+  SegmentTree st(arr.size());
+  st.build(arr, 0, 0, arr.size()-1);
+  int res=st.querry(0, 0, arr.size()-1, 1, 3);
+  cout << res << endl;
+  return 0;
 }

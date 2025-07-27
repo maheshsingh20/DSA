@@ -130,6 +130,163 @@
 //     return 0;
 // }
 
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int val;
+    Node *left, *right;
+    Node(int v) : val(v), left(nullptr), right(nullptr) {}
+};
+
+// Function to delete a node in BST
+Node* deleteNode(Node* root, int key) {
+    if (!root) return nullptr;
+
+    if (key < root->val)
+        root->left = deleteNode(root->left, key);
+    else if (key > root->val)
+        root->right = deleteNode(root->right, key);
+    else {
+        if (!root->left) return root->right;
+        if (!root->right) return root->left;
+
+        Node* temp = root->right;
+        while (temp->left) temp = temp->left;
+        root->val = temp->val;
+        root->right = deleteNode(root->right, temp->val);
+    }
+    return root;
+}
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int val, height;
+    Node *left, *right;
+    Node(int v) : val(v), height(1), left(nullptr), right(nullptr) {}
+};
+
+int getHeight(Node* n) {
+    return n ? n->height : 0;
+}
+
+int getBalance(Node* n) {
+    return n ? getHeight(n->left) - getHeight(n->right) : 0;
+}
+
+void updateHeight(Node* n) {
+    if (n)
+        n->height = 1 + max(getHeight(n->left), getHeight(n->right));
+}
+
+// Right rotate
+Node* rightRotate(Node* y) {
+    Node* x = y->left;
+    Node* T2 = x->right;
+
+    x->right = y;
+    y->left = T2;
+
+    updateHeight(y);
+    updateHeight(x);
+    return x;
+}
+
+// Left rotate
+Node* leftRotate(Node* x) {
+    Node* y = x->right;
+    Node* T2 = y->left;
+
+    y->left = x;
+    x->right = T2;
+
+    updateHeight(x);
+    updateHeight(y);
+    return y;
+}
+
+// Rebalance the tree at node
+Node* rebalance(Node* node) {
+    updateHeight(node);
+    int balance = getBalance(node);
+
+    // Left Left
+    if (balance > 1 && getBalance(node->left) >= 0)
+        return rightRotate(node);
+
+    // Left Right
+    if (balance > 1 && getBalance(node->left) < 0) {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
+    }
+
+    // Right Right
+    if (balance < -1 && getBalance(node->right) <= 0)
+        return leftRotate(node);
+
+    // Right Left
+    if (balance < -1 && getBalance(node->right) > 0) {
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
+    }
+
+    return node;
+}
+
+// Get min value node
+Node* getMin(Node* node) {
+    while (node->left) node = node->left;
+    return node;
+}
+
+// Delete in AVL tree
+Node* deleteNode(Node* root, int key) {
+    if (!root) return root;
+    if (key < root->val)
+        root->left = deleteNode(root->left, key);
+    else if (key > root->val)
+        root->right = deleteNode(root->right, key);
+    else {
+        if (!root->left || !root->right) {
+            Node* temp = root->left ? root->left : root->right;
+            delete root;
+            return temp;
+        } else {
+            Node* temp = getMin(root->right);
+            root->val = temp->val;
+            root->right = deleteNode(root->right, temp->val);
+        }
+    }
+    return rebalance(root);
+}
+
+// Inorder print
+void inorder(Node* root) {
+    if (!root) return;
+    inorder(root->left);
+    cout << root->val << " ";
+    inorder(root->right);
+}
+
+int main() {
+    Node* root = new Node(50);
+    root = deleteNode(root, 50); // initially one node
+
+    root = new Node(50);
+    root->left = new Node(30);
+    root->right = new Node(70);
+    root->left->left = new Node(20);
+    root->left->right = new Node(40);
+    root->right->left = new Node(60);
+    root->right->right = new Node(80);
+
+    root = deleteNode(root, 50); // delete root
+
+    inorder(root);
+    return 0;
+}
+
 
 #include <iostream>
 #include <vector>

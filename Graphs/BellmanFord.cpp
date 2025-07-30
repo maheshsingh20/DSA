@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-struct edge {
-    int u, v, w;
-};
+struct edge{
+  int u, v, w;
+}
 
 int main() {
     int node = 8;

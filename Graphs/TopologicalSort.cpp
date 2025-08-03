@@ -32,7 +32,6 @@ int main() {
       qt.push(i);
     }
   }
-
   vector<int> res;
   while (!qt.empty()) {
     int curr = qt.front();

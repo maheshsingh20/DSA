@@ -1,39 +1,47 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+#define int long long
 
-int main(){
-   ios_base::sync_with_stdio(false);
-   cin.tie(nullptr);
+int32_t main(){
+   ios_base::sync_with_stdio(0);
+   cin.tie(0);
    int t;
    cin >> t;
    while(t--){
-      int n, m;
-      cin >> n >> m;
+      int n, k;
+      cin >> n >> k;
       vector<int> arr(n);
-      for (int i = 0; i < n;i++){
+      for (int i = 0; i < n; i++){
          cin >> arr[i];
       }
-      int start = arr[k];
-
+      int curr = k-1;
+      int currElement = arr[curr];
       sort(arr.begin(), arr.end());
-      int idx = 0;
-      for (int i = n - 1; i >= 0;i--){
-         if(arr[i]==start){
-            idx = i;
+      for (int i = n-1; i >= 0;i--){
+         if(arr[i]==currElement){
+            curr = i;
             break;
          }
       }
-      bool res = false;
-      int lev = 0;
-      for (int i = 0; i < n;i++){
-         lev += arr[i];
-         int gap = arr[idx + 1] - start;
-         if(lev>gap){
-            res = true;
-            break;
+      int start = 0;
+      int currIndex = curr;
+      bool res = true;
+      while(currIndex < n){
+         int need=arr[currIndex+1]-arr[currIndex];
+         int available = arr[currIndex] - start;
+         if(available>=need){
+            start += need;
+            currIndex++;
          }else{
-            if(lev>)
+            res = false;
+            break;
          }
+      }
+      if(res){
+         cout<<"YES\n";
+      }else{
+         cout << "NO\n";
       }
    }
+   return 0;
 }

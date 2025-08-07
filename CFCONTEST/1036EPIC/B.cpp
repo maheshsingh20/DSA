@@ -1,35 +1,60 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
-
-int32_t main(){
-   ios_base::sync_with_stdio(false);
-   cin.tie(nullptr);
-   int t;
-   cin >> t;
-   while(t--){
-      int n;
-      cin >> n;
-      vector<int> arr(n);
-      for (int i = 0; i < n;i++){
-         cin >> arr[i];
-      }
-      if(n==2){
-         int choice1 = arr[0] + min(arr[0], arr[1]);
-         int choice2 =arr[0]+arr[1];
-         cout << min(choice1, choice2) << endl;
-         continue;
-      }
-      int minn = arr[0];
-      int ans = arr[0];
-      for (int i = 1; i < n; i++) {
-         if(i==n-1 and min(minn,arr[i])>0){
-            break;
-         }
-         minn = min(minn, arr[i]);
-         ans += minn;
-      }
-      cout << ans << endl;
-   }
-   return 0;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    if (!(cin >> t)) return 0;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<long long> a(n + 2), p(n + 2), suf(n + 3), c0(n + 2);
+        // Input array a[1...n]
+        for (int i = 1; i <= n; i++) cin >> a[i];
+        // Prefix min array banao: p[i] = min(a[1]...a[i])
+        p[1] = a[1];
+        for (int i = 2; i <= n; i++) {
+            p[i] = min(p[i - 1], a[i]);
+        }
+        // Pehle ka total prefix sum calculate karo
+        long long S0 = 0;
+        for (int i = 1; i <= n; i++) S0 += p[i];
+        // Suffix sum of prefix mins banao
+        suf[n + 1] = 0;
+        for (int i = n; i >= 1; i--) {
+            suf[i] = p[i] + suf[i + 1];
+        }
+        // f: jahan se prefix min same hone lagta hai
+        int f = n + 1;
+        for (int i = 2; i <= n - 1; i++) {
+            if (p[i] == p[i - 1]) {
+                f = i;
+                break;
+            }
+        }
+        // Difference array: c0[i] = p[i-1] - p[i]
+        for (int i = 2; i <= n; i++) {
+            c0[i] = p[i - 1] - p[i];
+        }
+        // best: max kitna sum reduce kar sakte ho ek operation se
+        long long best = 0, M = LLONG_MAX;
+        for (int j = 2; j <= n; j++) {
+            long long sv;
+            if (j <= f) {
+                // Agar j < f, toh prefix affect hoga
+                if (j == 2) {
+                    sv = suf[j] - a[j];
+                } else {
+                    M = min(M, c0[j - 1]);
+                    sv = suf[j] - min(a[j], M);
+                }
+            } else {
+                // Agar j >= f, koi impact nahi prefix pe
+                sv = suf[j];
+            }
+            best = max(best, sv);
+        }
+        cout << S0 - best;
+        if (t) cout << "\n";
+    }
 }

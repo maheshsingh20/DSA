@@ -6,7 +6,7 @@ using namespace std;
 class FenwickTree{
   int n;
   vector<int> bit;
-public:
+public: 
 
   FenwickTree(int n){
     this->n = n;
